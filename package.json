@@ -1,0 +1,27 @@
+{
+  "name": "restaurant_management_project",
+  "version": "1.0.0",
+  "description": "restaurent management application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all"
+  },
+  "author": "Raunak Pramod Agrahari",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "joi": "^17.8.3",
+    "nodemon": "^2.0.21",
+    "pg": "^8.9.0",
+    "pino": "^8.11.0",
+    "pino-pretty": "^9.4.0",
+    "sequelize": "^6.29.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.0"
+  }
+}
