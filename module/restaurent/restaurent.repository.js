@@ -1,6 +1,7 @@
 const { Restaurents } = require('./../../models');
 const { pagination } = require('../../utilities');
 const { Op } = require('sequelize');
+const { object } = require('joi');
 
 
 exports.createRestaurent = (data, t = null) => {
@@ -15,9 +16,6 @@ exports.getRestaurentById = async (id) => {
     });
 };
 
-// exports.getAllRestaurents = () => {
-//     return Restaurents.findAll();
-// };
 
 exports.updateRestaurent = (data, id) => {
     return Restaurents.update(data, {
@@ -38,38 +36,28 @@ exports.deleteRestaurent = (id) => {
 exports.getAllRestaurents = async (params, t = null) => {
     const where = { vegOnly: true };
 
-
     const sortBy = params?.filter?.sortBy || "createdAt";
     const orderBy = params?.filter?.orderBy || "DESC";
+    // where[Op.and] = [];
 
     const { limit, offset } = pagination.getPagination(params.page, params.items);
-    console.log(params)
+    // console.log(params)
+
+    where[Op.and] = [];
 
     if (params.search) {
-        where = {
+        where[Op.and].push({
             [Op.or]: [
                 {
-                    cost: {
-                        [Op.in]: ['Low','High']
-                    },
-                }
+                    cost:params.search,
+                },
             ],
-            [Op.or]: [
-                {
-                    cuisineTypes: {
-                        [Op.iLike]: `%${params.search}%`,
-                    },
-                }
-            ],
-        };
+        });
     }
+    console.log(where)
 
     if (params.filter) {
-        if (params.filter.from && params.filter.to) {
-            where.createdAt = {
-                [Op.between]: [params.filter.from, params.filter.to],
-            };
-        }
+        where.cuisineTypes = { [Op.contains]: [params.filter] }
     }
 
     return await Restaurents.findAndCountAll(

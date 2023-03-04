@@ -5,7 +5,7 @@ module.exports = async (params) => {
     try {
         const { page, items } = params;
         const search = params.search || null;
-        const filter = params.filter ? JSON.parse(params.filter) : null;
+        const filter = params.filter;
 
         const queryParams = {
             page,

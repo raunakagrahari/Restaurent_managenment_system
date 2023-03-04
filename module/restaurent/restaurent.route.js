@@ -6,7 +6,7 @@ const { getRestaurentSchema, postRestaurentSchema } = require('./restaurent.vali
 
 
 router.post('/create',validationMiddleware(postRestaurentSchema), restaurentController.createRestaurent );
-router.get('/getAll', restaurentController.getAllRestaurent );
+router.get('/getAll', validationMiddleware(getRestaurentSchema), restaurentController.getAllRestaurent );
 router.patch('/update/:id', restaurentController.updateRestaurent);
 router.delete('/delete/:id', restaurentController.deleteRestaurent);
 
