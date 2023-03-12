@@ -2,7 +2,6 @@ const http = require('http');
 const app = require('./app');
 const { logger } = require('./utilities');
 const port = 3000
-
 const server = http.createServer(app);
 
 function onError(error) {
