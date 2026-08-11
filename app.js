@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const restaurentRouter = require('./routes/index');
 const { errorHandler } = require('./helpers');
+const logger = require('./utilities/logger');
 const app = express();
 
 app.use(bodyParser.json());

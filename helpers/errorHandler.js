@@ -1,4 +1,10 @@
-const { ErrorResponse } = require('../helpers/errorResponse');
+class ErrorResponse extends Error {
+    constructor(message, statusCode) {
+        super(message);
+        this.statusCode = statusCode;
+        this.type = 'Error';
+    }
+}
 const { logger } = require('../utilities');
 
 // eslint-disable-next-line no-unused-vars
